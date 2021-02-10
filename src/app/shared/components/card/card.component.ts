@@ -1,5 +1,7 @@
+
 import { listaPokemon } from './../../../core/services/pokemon';
 import { Component, OnInit, Input, Injectable } from '@angular/core';
+
 
 @Component({
   selector: 'app-card',
@@ -11,10 +13,15 @@ import { Component, OnInit, Input, Injectable } from '@angular/core';
 
 export class CardComponent implements OnInit {
 
-  @Input() abacaxi: any;
+  @Input() pokemon: any;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public enviaCarta(pokemons: any) {
+    console.log(pokemons)
   }
 
 }
