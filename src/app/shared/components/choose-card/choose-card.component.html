@@ -1,6 +1,12 @@
 <div *ngIf="baralhos_collect as baralhos" id="choose-card-container">
-    <div *ngFor="let baralho of baralhos">
-        <h3>{{ baralho.name }}</h3>
+    <div *ngFor="let baralho of baralhos" class="geral-container">
+        <div class="card-title">
+            <h3>{{ baralho.name }}</h3>
+            <button mat-flat-button type="submit"
+            color="warn" (click)="RemoveBaralho(baralho.name)" >
+                Remover
+            </button>
+        </div>
         <div  class="card-container">
             <div *ngFor="let card of baralho.cartas">
                 <mat-card class="card">

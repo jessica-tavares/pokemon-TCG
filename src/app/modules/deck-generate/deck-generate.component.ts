@@ -22,11 +22,10 @@ export class DeckGenerateComponent implements OnInit {
   pokemons$!: Observable<any>;
   nome_baralho: string = "Nome do baralho";
   can_add: boolean = true;
-  cartas_baralho: any[] = [];
-  baralhos: any = []
-  nomes: any[string] = [];
+  baralhos: any = {};
+  save_baralhos: any = [];
 
-  constructor(cardComponent: CardComponent,
+  constructor(
     private service: CrudService,
     private router: Router) { 
 
@@ -40,32 +39,49 @@ export class DeckGenerateComponent implements OnInit {
 
   ChangeName(form: any) {
     this.nome_baralho = form.value.nome;
-    this.nomes.push(form.value.nome);
-    this.baralhos.push({
+    this.baralhos = {
       name: this.nome_baralho,
       cartas: []
-    });
+    };
     this.can_add = false;
   }
   
   cartaRecebida(event: any) {
-    const index = this.nomes.indexOf(this.nome_baralho);
-    this.baralhos[index].cartas.push(event);
+    this.baralhos.cartas.push(event);
   }
 
   SalvarBaralho() {
-    const index = this.nomes.indexOf(this.nome_baralho);
-    const tamanho = this.baralhos[index].cartas.length;
-    if (tamanho < 24) {
+    const storage = this.verificaLocalStorage();
+    let index: number = 0;
+    // Lógica para limitar min e max de cartas
+    const tamanho = this.baralhos.cartas.length;
+    if (tamanho < 4) {
       return alert("O baralho deve ter no mínimo 24 cartas!");
     }
     if (tamanho > 60) {
       return alert("O baralho deve ter no máximo 60 cartas");
     }
-    else {
-      localStorage.setItem("baralhos", JSON.stringify(this.baralhos));
-      this.router.navigate(['/']);
+    if (storage.length > 0) {
+      storage.push(this.baralhos);
+      console.log(storage)
+      localStorage.setItem("baralhos", JSON.stringify(storage));
+    }else {
+      this.save_baralhos.push(this.baralhos);
+      localStorage.setItem("baralhos", JSON.stringify(this.save_baralhos));
     }
+    this.router.navigate(['/']);
+  }
+
+  verificaLocalStorage() {
+    const storage = localStorage.getItem("baralhos");
+    if (storage) {
+      return JSON.parse(storage);
+    }
+    return [];
+  }
+
+  verificaCartasRepetidas() {
+    
   }
 
 }
