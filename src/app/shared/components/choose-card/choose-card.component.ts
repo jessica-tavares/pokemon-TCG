@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-choose-card',
@@ -23,7 +23,10 @@ export class ChooseCardComponent implements OnInit {
     this.baralhos_collect = JSON.parse(this.baralho);
   }
 
-  ngDoCheck() {
+  RemoveBaralho(nome: string) {
+    const result = this.baralhos_collect.filter((item: { name: string; }) => item.name !== nome);
+    this.baralhos_collect = result;
+    localStorage.setItem('baralhos', JSON.stringify(result));
   }
 
 }
