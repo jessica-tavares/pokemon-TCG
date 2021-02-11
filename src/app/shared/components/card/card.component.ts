@@ -1,6 +1,6 @@
+import { Component, OnInit, Input, Injectable, Output, EventEmitter } from '@angular/core';
+// import { listaPokemon } from './../../../core/services/pokemon';
 
-import { listaPokemon } from './../../../core/services/pokemon';
-import { Component, OnInit, Input, Injectable } from '@angular/core';
 
 
 @Component({
@@ -14,6 +14,9 @@ import { Component, OnInit, Input, Injectable } from '@angular/core';
 export class CardComponent implements OnInit {
 
   @Input() pokemon: any;
+  @Input() disable: boolean = true;
+
+  @Output() carta = new EventEmitter();
 
   constructor() { }
 
@@ -21,7 +24,7 @@ export class CardComponent implements OnInit {
   }
 
   public enviaCarta(pokemons: any) {
-    console.log(pokemons)
+    this.carta.emit(pokemons);
   }
 
 }
