@@ -19,12 +19,11 @@ export class ChooseCardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.baralhos_collect = localStorage.getItem("baralhos");
-    this.names = console.log(localStorage.getItem("nomes"));
+    this.baralho = localStorage.getItem("baralhos");
+    this.baralhos_collect = JSON.parse(this.baralho);
   }
 
   ngDoCheck() {
-    console.log();
   }
 
 }

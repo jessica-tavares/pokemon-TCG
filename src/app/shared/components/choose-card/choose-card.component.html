@@ -1,0 +1,13 @@
+<div *ngIf="baralhos_collect as baralhos" id="choose-card-container">
+    <div *ngFor="let baralho of baralhos">
+        <h3>{{ baralho.name }}</h3>
+        <div  class="card-container">
+            <div *ngFor="let card of baralho.cartas">
+                <mat-card class="card">
+                    {{ card.name }}
+                    <button mat-button></button>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

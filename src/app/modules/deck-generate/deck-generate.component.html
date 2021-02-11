@@ -1,14 +1,14 @@
-<mat-grid-list cols="2" rowHeight="fit" *ngIf="pokemons$ | async as pokemons" id="deck-cointainer">
-    <div>
+<mat-grid-list cols="2" rowHeight="fit" *ngIf="pokemons$ | async as pokemons" id="deck-container">
+    <div class="top-container">
         <h2>{{ nome_baralho }}</h2>
-        <button (click)="SalvarBaralho()" mat-button color="accent">
+        <button (click)="SalvarBaralho()" mat-flat-button color="accent">
             Salvar Baralho
         </button>
         <form class="example-form" #f="ngForm" (ngSubmit)="ChangeName(f)">
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Nome" name="nome" id="nome" ngModel>
             </mat-form-field>
-            <button mat-stroked-button type="submit"
+            <button mat-flat-button type="submit"
               color="accent"
               >Salvar</button>
         </form>   

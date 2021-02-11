@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './modules/home/home.component';
-import { CardComponent } from './shared/components/card/card.component'
 import { FormsModule } from '@angular/forms';
-import { ChooseCardComponent } from './shared/choose-card/choose-card.component';
+
+import { StylesModule } from './configs/styles/styles.module';
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './modules/home/home.component';
 import { DeckGenerateComponent } from './modules/deck-generate/deck-generate.component';
+import { CardComponent } from './shared/components/card/card.component'
+import { ChooseCardComponent } from './shared/components/choose-card/choose-card.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 
 @NgModule({
@@ -21,18 +20,15 @@ import { DeckGenerateComponent } from './modules/deck-generate/deck-generate.com
     HomeComponent,
     CardComponent,
     ChooseCardComponent,
-    DeckGenerateComponent
+    DeckGenerateComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatInputModule,
-    MatCardModule,
-    BrowserAnimationsModule
+    StylesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

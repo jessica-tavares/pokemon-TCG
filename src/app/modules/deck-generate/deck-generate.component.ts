@@ -1,9 +1,10 @@
+import { Component, Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
+
 import { CrudService } from './../../core/services/crud.service';
 import { CardComponent } from './../../shared/components/card/card.component';
-import { Component, Injectable, OnInit } from '@angular/core';
-
 // import { listaPokemon } from '../../core/services/pokemon';
-import { Observable } from 'rxjs';
 
 
 
@@ -19,13 +20,15 @@ export class DeckGenerateComponent implements OnInit {
 
   pokemons: any;
   pokemons$!: Observable<any>;
-  nome_baralho: string = "Baralho";
+  nome_baralho: string = "Nome do baralho";
   can_add: boolean = true;
   cartas_baralho: any[] = [];
-  baralhos: any = {}
+  baralhos: any = []
   nomes: any[string] = [];
 
-  constructor(cardComponent: CardComponent, private service: CrudService) { 
+  constructor(cardComponent: CardComponent,
+    private service: CrudService,
+    private router: Router) { 
 
   }
 
@@ -38,20 +41,31 @@ export class DeckGenerateComponent implements OnInit {
   ChangeName(form: any) {
     this.nome_baralho = form.value.nome;
     this.nomes.push(form.value.nome);
-    const index = this.nomes.indexOf(this.nome_baralho);
-    this.baralhos[index] = []
+    this.baralhos.push({
+      name: this.nome_baralho,
+      cartas: []
+    });
     this.can_add = false;
   }
   
   cartaRecebida(event: any) {
-    this.cartas_baralho.push(event);
     const index = this.nomes.indexOf(this.nome_baralho);
-    this.baralhos[index].push(this.cartas_baralho);
+    this.baralhos[index].cartas.push(event);
   }
 
   SalvarBaralho() {
-    localStorage.setItem("baralhos", JSON.stringify(this.baralhos));
-    localStorage.setItem("nomes", JSON.stringify(this.nomes));
+    const index = this.nomes.indexOf(this.nome_baralho);
+    const tamanho = this.baralhos[index].cartas.length;
+    if (tamanho < 24) {
+      return alert("O baralho deve ter no mínimo 24 cartas!");
+    }
+    if (tamanho > 60) {
+      return alert("O baralho deve ter no máximo 60 cartas");
+    }
+    else {
+      localStorage.setItem("baralhos", JSON.stringify(this.baralhos));
+      this.router.navigate(['/']);
+    }
   }
 
 }
