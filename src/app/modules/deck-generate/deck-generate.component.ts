@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { CrudService } from './../../core/services/crud.service';
 import { LocalStorageService } from './../../core/services/local-storage.service';
@@ -20,7 +20,8 @@ export class DeckGenerateComponent implements OnInit {
 
   pokemons: any;
   pokemons$!: Observable<any>;
-  nome_baralho: string = "Nome do baralho";
+  nome_baralho: string = '';
+  disable_button: boolean = true;
   can_add: boolean = true;
   baralhos: any = {};
   save_baralhos: any = [];
@@ -34,7 +35,7 @@ export class DeckGenerateComponent implements OnInit {
 
   ngOnInit(): void {
     // this.service.list().subscribe(data => this.pokemons = data.data);
-    this.pokemons$ = this.service.list();
+    this.pokemons$ = this.service.list('', 40);
     this.pokemons = this.pokemons$;
   }
 
@@ -91,6 +92,16 @@ export class DeckGenerateComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  searchName(event: string) {
+    this.pokemons$ = this.service.list(event, 40);
+    this.pokemons = this.pokemons$;
+  }
+
+  NewCards(newBaralho: any) {
+    console.log(newBaralho)
+    // this.baralhos = newBaralho;
   }
 
 }

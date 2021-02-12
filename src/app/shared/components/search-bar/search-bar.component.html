@@ -1,0 +1,8 @@
+<div id="search-bar-conatiner">
+    <h2>{{ deckName }}</h2>
+    <form class="example-form" #sf="ngForm" (ngSubmit)="enviaPesquisa(sf)">
+        <mat-form-field floatLabel="never" class="example-full-width">
+          <input matInput placeholder="Pesquisa" name="search" ngModel>
+        </mat-form-field>
+    </form>
+</div>

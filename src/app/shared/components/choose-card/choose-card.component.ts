@@ -1,6 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { Component, OnInit, Injectable, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-choose-card',
@@ -12,20 +10,29 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 
 export class ChooseCardComponent implements OnInit {
 
-  baralhos_collect: any;
-  names: any[string];
+  @Input() cards: any;
+  @Output() currentCards = new EventEmitter;
 
-  constructor(private LSService: LocalStorageService) {
+  allCards: any;
+
+
+  constructor() {
     
    }
 
   ngOnInit(): void {
-    this.baralhos_collect = this.LSService.get("baralhos");
+    this.allCards = this.cards;
+    console.log(this.allCards)
   }
 
-  RemoveBaralho(nome: string) {
-    this.baralhos_collect = this.baralhos_collect.filter((item: { name: string; }) => item.name !== nome);
-    this.LSService.set('baralhos', this.baralhos_collect);
+  addCarta(carta: any) {
+    this.allCards.cartas.push(carta);
+    this.currentCards.emit(this.cards);
+  }
+
+  RemoveCarta(nome: string) {
+    this.allCards = this.cards.cartas.filter((item: { name: string; }) => item.name !== nome);
+    this.currentCards.emit(this.cards);
   }
 
 }

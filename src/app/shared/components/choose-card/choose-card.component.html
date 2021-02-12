@@ -1,27 +1,13 @@
-<div *ngIf="baralhos_collect as baralhos" id="choose-card-container">
-    <div *ngFor="let baralho of baralhos" class="geral-container">
-        <div class="card-title">
-            <h3>{{ baralho.name }}</h3>
-            <button mat-flat-button type="submit"
-                color="primary" [routerLink]="['details', baralho.id]">
-                <span class="material-icons">
-                    add_circle_outline
-                </span>
+<div *ngIf="allCards as deckCards" id="choose-card-container">
+    <div *ngFor="let card of deckCards.cartas" class="card-container">
+        <mat-card class="card">
+            {{ card.name }}
+            <button mat-icon-button (click)="addCarta(card)">
+                <mat-icon>add_circle_outline</mat-icon>
             </button>
-            <button mat-flat-button type="submit"
-                color="warn" (click)="RemoveBaralho(baralho.name)">
-                <span class="material-icons">
-                    delete_sweep
-                </span>
+            <button mat-icon-button (click)="RemoveCarta(card.name)">
+                <mat-icon>remove_circle_outline</mat-icon>
             </button>
-        </div>
-        <div  class="card-container">
-            <div *ngFor="let card of baralho.cartas">
-                <mat-card class="card">
-                    {{ card.name }}
-                    <button mat-button></button>
-                </mat-card>
-            </div>
-        </div>
+        </mat-card>
     </div>
 </div>

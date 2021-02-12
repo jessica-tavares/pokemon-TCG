@@ -10,11 +10,12 @@ import { listaPokemon } from './pokemon';
 
 export class CrudService {
 
-  private readonly API = 'https://api.pokemontcg.io/v2/cards';
+  private readonly API = 'https://api.pokemontcg.io/v1/cards';
+  page: number = 1;
 
   constructor(private http: HttpClient) { }
 
-  list() {
-    return this.http.get(this.API);
+  list(search: string, pageSize: number) {
+    return this.http.get(`${this.API}?page=${this.page}&name=${search}&pageSize=${pageSize}`);
   }
 }

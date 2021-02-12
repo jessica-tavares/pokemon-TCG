@@ -1,0 +1,19 @@
+<div *ngIf="baralhos_collect as baralhos" id="choose-card-container">
+    <div *ngFor="let baralho of baralhos" class="geral-container">
+        <div class="card-title">
+            <h3>{{ baralho.name }}</h3>
+            <button mat-flat-button type="submit"
+                color="primary" [routerLink]="['details', baralho.id]">
+                <span class="material-icons">
+                    add_circle_outline
+                </span>
+            </button>
+            <button mat-flat-button type="submit"
+                color="warn" (click)="RemoveBaralho(baralho.name)">
+                <span class="material-icons">
+                    delete_sweep
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

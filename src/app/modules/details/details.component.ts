@@ -24,6 +24,7 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.baralhos_collection = this.LSService.get('baralhos');
     this.baralho = this.findDeck();
+    console.log(this.baralho)
     this.infosBaralho();
 }
 
@@ -39,15 +40,26 @@ export class DetailsComponent implements OnInit {
   }
 
   infosBaralho() {
-    const superTypes: number = (this.baralho.cartas
-      .filter((item: { supertype: string; }) => item.supertype === "trainer" )).length;
+    const trainer: number = (this.baralho.cartas
+      .filter((item: { supertype: string; }) => item.supertype === "Trainer" )).length;
+    const pokemons: number = (this.baralho.cartas
+      .filter((item: { supertype: string; }) => item.supertype === "Pokémon" )).length;
     const onlyType: number = (this.baralho.cartas
-      .filter(({types}: any) => types.length == 1).length);
+      .filter((item: { types: string | any[]; }) => item.types?.length == 1)).length;
+    const colorsArray: any= [];
+    this.baralho.cartas.map((item: { types: any; }) => {
+      return colorsArray.push(item.types)
+    });
+    const colors = new Set(colorsArray.map(JSON.stringify))
     this.infos = {
       name: this.baralho.name,
-      superTypes,
-      onlyType
+      allPokemons: this.baralho.cartas.length,
+      trainer,
+      pokemons,
+      onlyType,
+      colors: colors.size,
     }
+    console.log(this.infos)
   }
 
 }

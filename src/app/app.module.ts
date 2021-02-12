@@ -14,6 +14,8 @@ import { CardComponent } from './shared/components/card/card.component'
 import { ChooseCardComponent } from './shared/components/choose-card/choose-card.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { DetailsComponent } from './modules/details/details.component';
+import { DecksComponent } from './shared/components/decks/decks.component';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { DetailsComponent } from './modules/details/details.component';
     ChooseCardComponent,
     DeckGenerateComponent,
     HeaderComponent,
-    DetailsComponent
+    DetailsComponent,
+    DecksComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

@@ -5,12 +5,28 @@
         display: flex 
         flex-direction: row
         justify-content: space-around
+        margin-top: 20px
+
+        .top-container__right
+            display: flex
+            flex-direction: column
+            justify-content: center
+
+            .example-form
+                    
+                .example-full-width
+                width: 100%
+                border: 1px solid purple
+                border-radius: 8px
+                margin: 15px
+                paddin: 5px
+            
         
     
     .container
         display: flex
         flex-direction: row
-        justify-content: space-around
+        justify-content: space-between
         margin-top: 15px
 
         .left-content
@@ -21,7 +37,8 @@
         .right-content
             display: flex
             flex-direction: column
-            justify-content: space-around
+            align-content: flex-start
+    
     .example-spacer
         flex: 1 1 auto
         justify-content: space-around
