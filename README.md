@@ -1,27 +1,39 @@
 # PokemonTcg
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
+Repositorio Desafio Pokemon TCG - primeiro projeto em angular
 
-## Development server
+A ideia é bem simples e o desafio também, gostaríamos de uma aplicação que consulte a api de pokemon TCG (https://docs.pokemontcg.io/#api_v1cards_list) e que nossos jogadores pudessem montar um baralho em cima dela.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Lista de baralhos
 
-## Code scaffolding
+[]- O usuário pode ver seus baralhos;
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+[]- O usuário pode criar um novo baralho;
 
-## Build
+[]- O usuário pode remover um baralho;
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+[]- O usuário pode editar um baralho;
 
-## Running unit tests
+[]- O usuário pode clicar num baralho para visualizar seus detalhes.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Criação de um baralho
 
-## Running end-to-end tests
+[]- O usuário pode colocar um nome no seu baralho;
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+[]- O usuário pode inserir cartas no baralho;
 
-## Further help
+[]- O baralho tem que ter no mínimo 24 cartas e no máximo 60;
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[]- Só podem ter 4 cartas com o mesmo nome, no baralho. (Nome não id);
+
+[]- Após salvar o baralho voltamos para a página de lista de baralhos atualizada;
+
+[]- O baralho será salvo apenas em memória.
+
+Detalhes do baralho
+
+[]- O usuário consegue ver quantos pokemons e cartas de treinador existem no baralho. (atributo supertype)
+
+[]- O usuário consegue ver de quantas cores é o baralho. quantos types únicos existem no baralho.
+
+Quanto a interface, vamos deixar a sua criatividade falar mais alto, mas sabemos que bons desenvolvedores adoram um terminal e que o design fica mesmo com galera de UX/UI, o importante aqui é mostrar seu código com cobertura de testes, modularização e padrões.
