@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
 import { CrudService } from './../../core/services/crud.service';
-import { CardComponent } from './../../shared/components/card/card.component';
+import { LocalStorageService } from './../../core/services/local-storage.service';
 // import { listaPokemon } from '../../core/services/pokemon';
 
 
@@ -27,7 +27,8 @@ export class DeckGenerateComponent implements OnInit {
 
   constructor(
     private service: CrudService,
-    private router: Router) { 
+    private router: Router,
+    private LSService: LocalStorageService) { 
 
   }
 
@@ -40,6 +41,7 @@ export class DeckGenerateComponent implements OnInit {
   ChangeName(form: any) {
     this.nome_baralho = form.value.nome;
     this.baralhos = {
+      id: 0,
       name: this.nome_baralho,
       cartas: []
     };
@@ -47,12 +49,17 @@ export class DeckGenerateComponent implements OnInit {
   }
   
   cartaRecebida(event: any) {
+    const rep = this.verificaCartasRepetidas(event);
+    if(rep) return alert("Só é permitido adicionar 4 cartas iguais!")
     this.baralhos.cartas.push(event);
   }
 
   SalvarBaralho() {
     const storage = this.verificaLocalStorage();
-    let index: number = 0;
+    if(storage.length > 0) {
+      const last = storage.length - 1;
+      this.baralhos.id = storage[last].id + 1;
+    }
     // Lógica para limitar min e max de cartas
     const tamanho = this.baralhos.cartas.length;
     if (tamanho < 4) {
@@ -63,25 +70,27 @@ export class DeckGenerateComponent implements OnInit {
     }
     if (storage.length > 0) {
       storage.push(this.baralhos);
-      console.log(storage)
-      localStorage.setItem("baralhos", JSON.stringify(storage));
+      this.LSService.set("baralhos", storage);
     }else {
       this.save_baralhos.push(this.baralhos);
-      localStorage.setItem("baralhos", JSON.stringify(this.save_baralhos));
+      this.LSService.set("baralhos", this.save_baralhos);
     }
     this.router.navigate(['/']);
   }
 
   verificaLocalStorage() {
-    const storage = localStorage.getItem("baralhos");
-    if (storage) {
-      return JSON.parse(storage);
-    }
-    return [];
+    return this.LSService.get("baralhos");
   }
 
-  verificaCartasRepetidas() {
-    
+  verificaCartasRepetidas(evento: any) {
+    const count = this.baralhos.cartas.reduce((acc: number, { name }: any) => {
+      if(name == evento.name) return acc += 1;
+      return acc;
+    }, 1)
+    if (count > 4) {
+      return true;
+    }
+    return false;
   }
 
 }

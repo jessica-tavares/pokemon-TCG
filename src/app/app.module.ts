@@ -13,6 +13,7 @@ import { DeckGenerateComponent } from './modules/deck-generate/deck-generate.com
 import { CardComponent } from './shared/components/card/card.component'
 import { ChooseCardComponent } from './shared/components/choose-card/choose-card.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { DetailsComponent } from './modules/details/details.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
     CardComponent,
     ChooseCardComponent,
     DeckGenerateComponent,
-    HeaderComponent
+    HeaderComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
