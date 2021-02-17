@@ -16,6 +16,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { DetailsComponent } from './modules/details/details.component';
 import { DecksComponent } from './shared/components/decks/decks.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { EditComponent } from './modules/edit/edit.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SearchBarComponent } from './shared/components/search-bar/search-bar.co
     HeaderComponent,
     DetailsComponent,
     DecksComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

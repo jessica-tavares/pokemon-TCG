@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, Input } from '@angular/core';
 
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
@@ -12,18 +12,18 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 
 export class DecksComponent implements OnInit {
 
-  baralhos_collect: any;
+  @Input() baralhos_collect: any;
 
   constructor(private LSService: LocalStorageService) {
     
    }
 
   ngOnInit(): void {
-    this.baralhos_collect = this.LSService.get("baralhos");
+
   }
 
-  RemoveBaralho(nome: string) {
-    this.baralhos_collect = this.baralhos_collect.filter((item: { name: string; }) => item.name !== nome);
+  RemoveBaralho(id: number) {
+    this.baralhos_collect = this.baralhos_collect.filter((item: { id: number; }) => item.id !== id);
     this.LSService.set('baralhos', this.baralhos_collect);
   }
 

@@ -14,7 +14,7 @@ import { Component, OnInit, Input, Injectable, Output, EventEmitter } from '@ang
 export class CardComponent implements OnInit {
 
   @Input() pokemon: any;
-  @Input() disable: boolean = true;
+  @Input()  disable: boolean = true;
 
   @Output() carta = new EventEmitter();
 

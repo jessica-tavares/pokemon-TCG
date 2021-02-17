@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { tap } from 'rxjs/operators'
+import { Observable } from 'rxjs';
 
 import { listaPokemon } from './pokemon';
 
@@ -15,7 +15,7 @@ export class CrudService {
 
   constructor(private http: HttpClient) { }
 
-  list(search: string, pageSize: number) {
+  list(search: string, pageSize: number): Observable<any> {
     return this.http.get(`${this.API}?page=${this.page}&name=${search}&pageSize=${pageSize}`);
   }
 }

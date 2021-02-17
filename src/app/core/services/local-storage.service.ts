@@ -19,4 +19,11 @@ export class LocalStorageService {
     return [];
   }
 
+  getDeck(fieldName: string, id: number) {
+    const allDecks = this.get(fieldName);
+    const deck = allDecks.filter((deck: { id: number; }) => deck.id == id)[0];
+    return deck
+
+  }
+
 }

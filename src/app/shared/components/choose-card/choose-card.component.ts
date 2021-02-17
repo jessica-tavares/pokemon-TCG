@@ -10,10 +10,11 @@ import { Component, OnInit, Injectable, EventEmitter, Input, Output } from '@ang
 
 export class ChooseCardComponent implements OnInit {
 
-  @Input() cards: any;
+  @Input('cards') allCards: any;
   @Output() currentCards = new EventEmitter;
+  @Output() addCards = new EventEmitter;
 
-  allCards: any;
+  c: any;
 
 
   constructor() {
@@ -21,18 +22,15 @@ export class ChooseCardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.allCards = this.cards;
-    console.log(this.allCards)
   }
 
   addCarta(carta: any) {
-    this.allCards.cartas.push(carta);
-    this.currentCards.emit(this.cards);
+    this.addCards.emit(carta);
   }
 
-  RemoveCarta(nome: string) {
-    this.allCards = this.cards.cartas.filter((item: { name: string; }) => item.name !== nome);
-    this.currentCards.emit(this.cards);
+  RemoveCarta(index: number) {
+    this.allCards.cartas.splice(index, 1);
+    this.currentCards.emit(this.allCards);
   }
 
 }

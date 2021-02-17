@@ -1,5 +1,6 @@
 <div id="home-cointainer">
+    <app-search-bar (search)="searchDeckName($event)"></app-search-bar>
     <div class="right-content">
-        <app-decks></app-decks>
+        <app-decks [baralhos_collect]="allDecks"></app-decks>
     </div>
 </div>

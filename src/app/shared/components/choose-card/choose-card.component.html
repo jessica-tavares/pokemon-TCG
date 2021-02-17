@@ -1,11 +1,11 @@
 <div *ngIf="allCards as deckCards" id="choose-card-container">
-    <div *ngFor="let card of deckCards.cartas" class="card-container">
+    <div *ngFor="let card of deckCards.cartas; let i = index" class="card-container">
         <mat-card class="card">
             {{ card.name }}
             <button mat-icon-button (click)="addCarta(card)">
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
-            <button mat-icon-button (click)="RemoveCarta(card.name)">
+            <button mat-icon-button (click)="RemoveCarta(i)">
                 <mat-icon>remove_circle_outline</mat-icon>
             </button>
         </mat-card>

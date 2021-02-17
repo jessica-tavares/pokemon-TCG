@@ -22,22 +22,9 @@ export class DetailsComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.baralhos_collection = this.LSService.get('baralhos');
-    this.baralho = this.findDeck();
-    console.log(this.baralho)
+    this.baralho = this.LSService.getDeck('baralhos', this.deckId);
     this.infosBaralho();
 }
-
-  findDeck() {
-    // return this.baralhos_collection.filter((item: { id: number }) => {
-    //   ([this.deckId].indexOf(item.id) !== -1)
-    // })
-    for (let item in this.baralhos_collection) {
-      if(this.baralhos_collection[item].id == this.deckId){
-        return this.baralhos_collection[item];
-      }
-    }
-  }
 
   infosBaralho() {
     const trainer: number = (this.baralho.cartas
@@ -59,7 +46,6 @@ export class DetailsComponent implements OnInit {
       onlyType,
       colors: colors.size,
     }
-    console.log(this.infos)
   }
 
 }

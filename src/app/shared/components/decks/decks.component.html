@@ -2,17 +2,23 @@
     <div *ngFor="let baralho of baralhos" class="geral-container">
         <div class="card-title">
             <h3>{{ baralho.name }}</h3>
-            <button mat-flat-button type="submit"
+            <button mat-icon-button type="submit"
                 color="primary" [routerLink]="['details', baralho.id]">
-                <span class="material-icons">
+                <mat-icon>
                     add_circle_outline
-                </span>
+                </mat-icon>
             </button>
-            <button mat-flat-button type="submit"
-                color="warn" (click)="RemoveBaralho(baralho.name)">
-                <span class="material-icons">
+            <button mat-icon-button type="submit"
+                color="primary" [routerLink]="['edit', baralho.id]">
+                <mat-icon>
+                    drive_file_rename_outline
+                </mat-icon>
+            </button>
+            <button mat-icon-button type="submit"
+                color="warn" (click)="RemoveBaralho(baralho.id)">
+                <mat-icon>
                     delete_sweep
-                </span>
+                </mat-icon>
             </button>
         </div>
     </div>

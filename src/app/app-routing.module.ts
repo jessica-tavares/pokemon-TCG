@@ -1,3 +1,4 @@
+import { EditComponent } from './modules/edit/edit.component';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -9,6 +10,7 @@ import { DetailsComponent } from './modules/details/details.component';
 const appRoutes: Routes = [
   { path: 'deck', component: DeckGenerateComponent },
   { path: 'details/:id', component: DetailsComponent },
+  { path: 'edit/:id', component: EditComponent },
   { path: '', component: HomeComponent }
 ];
 

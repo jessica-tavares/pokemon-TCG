@@ -1,4 +1,4 @@
-<mat-grid-list cols="2" rowHeight="fit" *ngIf="pokemons$ | async as pokemons" id="deck-container">
+<mat-grid-list cols="2" rowHeight="fit" id="deck-container">
     <div class="top-container">
         <app-search-bar [deckName]="nome_baralho" (search)="searchName($event)"></app-search-bar>
         <div class="top-container__right">
@@ -14,13 +14,18 @@
         </div>
     </div>
     <div class="container">
-        <div class="left-content">
+        <mat-progress-spinner
+            color="accent"
+            mode="indeterminate"
+            *ngIf="showSpinner">
+        </mat-progress-spinner>
+        <div class="left-content" *ngIf="pokemons$ | async as pokemons">
             <mat-grid-list cols="3" rowHeight="fit" *ngFor="let item of pokemons.cards" class="left-container">
                 <app-card [pokemon]="item" [disable]="can_add" (carta)="cartaRecebida($event)"></app-card>
             </mat-grid-list>
         </div>
         <div class="right-content">
-            <app-choose-card [cards]="baralhos" (currentCards)="NewCards($event)"></app-choose-card>
+            <app-choose-card [cards]="baralhos"  (addCards)="cartaRecebida($event)" (currentCards)="NewCards($event)"></app-choose-card>
         </div>
     </div>
 </mat-grid-list>

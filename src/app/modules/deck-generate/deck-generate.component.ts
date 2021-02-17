@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -20,31 +20,33 @@ export class DeckGenerateComponent implements OnInit {
 
   pokemons: any;
   pokemons$!: Observable<any>;
-  nome_baralho: string = '';
+  showSpinner:boolean = true;
+  @Input() nome_baralho: string = '';
   disable_button: boolean = true;
-  can_add: boolean = true;
-  baralhos: any = {};
+  @Input() can_add: boolean = true;
+  @Input() @Output() baralhos: any = {};
   save_baralhos: any = [];
+  exist: boolean = false;
 
   constructor(
     private service: CrudService,
     private router: Router,
     private LSService: LocalStorageService) { 
-
   }
 
   ngOnInit(): void {
     // this.service.list().subscribe(data => this.pokemons = data.data);
     this.pokemons$ = this.service.list('', 40);
     this.pokemons = this.pokemons$;
+    this.showSpinner = false;
   }
 
   ChangeName(form: any) {
     this.nome_baralho = form.value.nome;
     this.baralhos = {
-      id: 0,
+      id: this.baralhos.id,
       name: this.nome_baralho,
-      cartas: []
+      cartas: this.baralhos.cartas || []
     };
     this.can_add = false;
   }
@@ -57,7 +59,8 @@ export class DeckGenerateComponent implements OnInit {
 
   SalvarBaralho() {
     const storage = this.verificaLocalStorage();
-    if(storage.length > 0) {
+    // cria o id do baralho caso não seja edição e ja exsta baralhos
+    if(storage.length > 0 && !this.exist) {
       const last = storage.length - 1;
       this.baralhos.id = storage[last].id + 1;
     }
@@ -69,10 +72,12 @@ export class DeckGenerateComponent implements OnInit {
     if (tamanho > 60) {
       return alert("O baralho deve ter no máximo 60 cartas");
     }
+    // lógica para salvar as cartas
     if (storage.length > 0) {
       storage.push(this.baralhos);
       this.LSService.set("baralhos", storage);
-    }else {
+    } else {
+      this.baralhos.id = 0;
       this.save_baralhos.push(this.baralhos);
       this.LSService.set("baralhos", this.save_baralhos);
     }
@@ -80,7 +85,13 @@ export class DeckGenerateComponent implements OnInit {
   }
 
   verificaLocalStorage() {
-    return this.LSService.get("baralhos");
+    let storage = this.LSService.get("baralhos");
+    const edition = storage.find((item: { id: any; }) => item.id == this.baralhos.id);
+    if(edition) {
+      storage = storage.filter((item: { id: any; }) => item.id != edition.id);
+      this.exist = true;
+    }
+    return storage;
   }
 
   verificaCartasRepetidas(evento: any) {
@@ -97,11 +108,11 @@ export class DeckGenerateComponent implements OnInit {
   searchName(event: string) {
     this.pokemons$ = this.service.list(event, 40);
     this.pokemons = this.pokemons$;
+    this.showSpinner = false;
   }
 
   NewCards(newBaralho: any) {
-    console.log(newBaralho)
-    // this.baralhos = newBaralho;
+    this.baralhos = newBaralho;
   }
 
 }
