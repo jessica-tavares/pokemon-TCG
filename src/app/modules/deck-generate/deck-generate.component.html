@@ -2,12 +2,8 @@
     <div class="top-container">
         <app-search-bar [deckName]="nome_baralho" (search)="searchName($event)"></app-search-bar>
         <div class="top-container__right">
-            <form class="example-form" #f="ngForm" (ngSubmit)="ChangeName(f)">
-                <mat-form-field floatLabel="never">
-                    <input matInput placeholder="Nome do baralho" class="example-full-width" name="nome" ngModel>
-                </mat-form-field>
-            </form>
-            <button (click)="SalvarBaralho()" mat-flat-button color="accent"
+            <input placeholder="Nome do baralho" class="name-input" (change)="ChangeName($event)">
+            <button (click)="SalvarBaralho()" class="save-btn"
                 [disabled]="can_add" >
                 Salvar Baralho
             </button>

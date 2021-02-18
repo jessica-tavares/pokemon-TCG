@@ -1,5 +1,10 @@
-<div id="home-cointainer">
-    <app-search-bar (search)="searchDeckName($event)"></app-search-bar>
+<div id="home-container">
+    <div class="first-div">
+        <app-search-bar (search)="searchDeckName($event)"></app-search-bar>
+        <button routerLink="/deck" class="button">
+          Criar Baralho
+        </button>
+    </div>
     <div class="right-content">
         <app-decks [baralhos_collect]="allDecks"></app-decks>
     </div>

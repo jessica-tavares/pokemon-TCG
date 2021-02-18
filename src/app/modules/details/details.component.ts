@@ -29,12 +29,13 @@ export class DetailsComponent implements OnInit {
   infosBaralho() {
     const trainer: number = (this.baralho.cartas
       .filter((item: { supertype: string; }) => item.supertype === "Trainer" )).length;
-    const pokemons: number = (this.baralho.cartas
-      .filter((item: { supertype: string; }) => item.supertype === "Pokémon" )).length;
+    const pokemons: any[] = this.baralho.cartas
+      .filter((item: { supertype: string; }) => item.supertype === "Pokémon" );
+    const pokemonsSize: number = pokemons.length;
     const onlyType: number = (this.baralho.cartas
       .filter((item: { types: string | any[]; }) => item.types?.length == 1)).length;
     const colorsArray: any= [];
-    this.baralho.cartas.map((item: { types: any; }) => {
+    pokemons.map((item: { types: any; }) => {
       return colorsArray.push(item.types)
     });
     const colors = new Set(colorsArray.map(JSON.stringify))
@@ -42,7 +43,7 @@ export class DetailsComponent implements OnInit {
       name: this.baralho.name,
       allPokemons: this.baralho.cartas.length,
       trainer,
-      pokemons,
+      pokemonsSize,
       onlyType,
       colors: colors.size,
     }

@@ -41,8 +41,9 @@ export class DeckGenerateComponent implements OnInit {
     this.showSpinner = false;
   }
 
-  ChangeName(form: any) {
-    this.nome_baralho = form.value.nome;
+  ChangeName(event: any) {
+    console.log(event)
+    this.nome_baralho = event.target.value;
     this.baralhos = {
       id: this.baralhos.id,
       name: this.nome_baralho,

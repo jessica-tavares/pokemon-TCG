@@ -1,8 +1,4 @@
 <div id="search-bar-conatiner">
     <h2>{{ deckName }}</h2>
-    <form class="example-form">
-        <mat-form-field floatLabel="never" class="example-full-width">
-          <input matInput placeholder="Pesquisa" value="" name="search" (keyup)="enviaPesquisa($event)">
-        </mat-form-field>
-    </form>
+    <input class="search-bar" placeholder="Pesquisa" name="search" (keyup)="enviaPesquisa($event)">
 </div>
