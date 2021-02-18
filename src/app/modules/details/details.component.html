@@ -10,11 +10,36 @@
         </mat-card-header>
         <mat-card-content>
           <p>{{ infos.allPokemons }} Numero total de cartas</p>
-          <p>{{ infos.trainer }} cartas de Treinador</p>
-          <p>{{ infos.pokemons }} cartas de Pokémons</p>
+          <p>{{ infos.trainerSize }} cartas de Treinador</p>
+          <p>{{ infos.pokemonsSize }} cartas de Pokémons</p>
           <p>{{ infos.onlyType }} Pokemons de tipo único</p>
           <p>{{ infos.colors }} cores</p>
         </mat-card-content>
-      </mat-card>
-      
+    </mat-card>
+    <div class="supertypes">
+      <div class="container" *ngIf="infos.trainer.length > 0">
+        <h3>Cartas Trainer</h3>
+        <div class="cards-container">
+          <div *ngFor="let trainer of infos.trainer">
+            <img src="{{ trainer.imageUrl }}" alt="trainer.name">
+          </div>
+        </div>
+      </div>
+      <div class="container" *ngIf="infos.pokemons.length > 0">
+        <h3>Cartas Pokémon</h3>
+        <div class="cards-container">
+          <div *ngFor="let pokemon of infos.pokemons">
+            <img src="{{ pokemon.imageUrl }}" alt="pokemon.name">
+          </div>
+        </div>
+      </div>
+      <div class="container" *ngIf="infos.energy.length > 0">
+        <h3>Cartas Energy</h3>
+        <div class="cards-container">
+          <div *ngFor="let energy of infos.energy">
+            <img src="{{ energy.imageUrl }}" alt="energy.name">
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

@@ -1,14 +1,16 @@
-<div *ngIf="baralhos_collect as baralhos" id="choose-card-container">
+<div *ngIf="baralhos_collect as baralhos"  id="choose-card-container">
     <div *ngFor="let baralho of baralhos" class="geral-container"
     [ngStyle]="{backgroundImage: 'url(../../../assets/pokemon-card-back-2.png)'}">
-        <a [routerLink]="['details', baralho.id]" class="card">
-            <h3>{{ baralho.name }}</h3>
+        <div class="card">
+            <a [routerLink]="['details', baralho.id]" class="card-name">
+                <h3>{{ baralho.name }}</h3>
+            </a>
             <div class="btn">
                 <button mat-icon-button class="icon-btn"
-                color="primary" [routerLink]="['edit', baralho.id]">
-                <mat-icon>
-                    drive_file_rename_outline
-                </mat-icon>
+                    color="primary" [routerLink]="['edit', baralho.id]">
+                    <mat-icon>
+                        drive_file_rename_outline
+                    </mat-icon>
                 </button>
                 <button mat-icon-button class="icon-btn"
                     color="warn" (click)="RemoveBaralho(baralho.id)">
@@ -17,6 +19,6 @@
                     </mat-icon>
                 </button>
             </div>
-        </a>
+        </div>
     </div>
 </div>
