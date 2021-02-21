@@ -67,7 +67,7 @@ export class DeckGenerateComponent implements OnInit {
     }
     // Lógica para limitar min e max de cartas
     const tamanho = this.baralhos.cartas.length;
-    if (tamanho < 4) {
+    if (tamanho < 24) {
       return alert("O baralho deve ter no mínimo 24 cartas!");
     }
     if (tamanho > 60) {
