@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { CrudService } from './../../core/services/crud.service';
 import { LocalStorageService } from './../../core/services/local-storage.service';
-// import { listaPokemon } from '../../core/services/pokemon';
 
 
 
